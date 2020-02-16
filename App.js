@@ -1,19 +1,31 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import * as WebBrowser from 'expo-web-browser';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text style={styles.text}>Test app built using Expo.</Text>
+      <Button
+        title="Visit Expo Site"
+        onPress={openBrowser}
+      />
     </View>
   );
+}
+
+function openBrowser() {
+  WebBrowser.openBrowserAsync('https://expo.io')
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#e0e0e0',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  text: {
+    color: '#111',
+  }
 });
