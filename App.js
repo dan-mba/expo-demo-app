@@ -1,31 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import * as WebBrowser from 'expo-web-browser';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { mapping, light as lightTheme } from '@eva-design/material';
+import { FAIconsPack } from './components/fa-icons';
+import AppNavigator from './components/navigation.component';
+import { default as appTheme } from './custom-theme.json';
+
+const theme = { ...lightTheme, ...appTheme };
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Test app built using Expo.</Text>
-      <Button
-        title="Visit Expo Site"
-        onPress={openBrowser}
-      />
-    </View>
+    <React.Fragment>
+      <IconRegistry icons={FAIconsPack} />
+      <ApplicationProvider mapping={mapping} theme={theme}>
+        <AppNavigator />
+      </ApplicationProvider>
+    </React.Fragment>
   );
 }
-
-function openBrowser() {
-  WebBrowser.openBrowserAsync('https://expo.io')
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#e0e0e0',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    color: '#111',
-  }
-});
