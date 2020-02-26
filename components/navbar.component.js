@@ -1,75 +1,68 @@
 import React from 'react';
-import { TopNavigation, TopNavigationAction, OverflowMenu, Icon } from '@ui-kitten/components';
-import { useNavigation } from '@react-navigation/native'
-
-const LIIcon = (style) => (
-  <Icon 
-    {...style}
-    name='linkedin-square'
-  />
-);
-
-const MenuIcon = (style) => (
-  <Icon 
-    {...style}
-    name='bars'
-  />
-);
-const HomeIcon = (style) => (
-  <Icon 
-    {...style}
-    name='home'
-  />
-);
+import { Appbar, Menu } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
+import * as WebBrowser from 'expo-web-browser';
 
 const NavBar = () => {
   const [menuVisible, setMenuVisible] = React.useState(false);
   const navigation = useNavigation();
 
-  const menuData = [
-    {
-      title: 'Home',
-      icon: HomeIcon,
-    }
-  ];
-
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
   };
 
+  const openBrowser = () => {
+    WebBrowser.openBrowserAsync('https://www.linkedin.com/in/danburkhardt');
+  }
+
   const onMenuItemSelect = (index) => {
-    // Handle Item Select
-    navigation.navigate(menuData[index].title);
+    navigation.navigate(index);
 
     setMenuVisible(false);
   };
 
-  const renderMenuAction = () => (
-    <OverflowMenu
-      visible={menuVisible}
-      data={menuData}
-      onSelect={onMenuItemSelect}
-      onBackdropPress={toggleMenu}>
-      <TopNavigationAction
-        icon={MenuIcon}
-        onPress={toggleMenu}
-      />
-    </OverflowMenu>
-  );
-
-  const renderLIAction = () => (
-    <TopNavigationAction icon={LIIcon}/>
-  );
+  const menuIcon = (name) => (props) => <FontAwesome name={name} {...props} />;
 
   return (
-    <TopNavigation
-      title='Daniel Burkhardt'
-      leftControl={renderMenuAction()}
-      rightControls={renderLIAction()}
-      alignment='center'
-    />
+    <Appbar style={styles.top}>
+      <Menu
+        visible={menuVisible}
+        onDismiss={toggleMenu}
+        anchor={
+          <Appbar.Action icon="bars" size={36} color="white" onPress={() => toggleMenu()} />
+        }
+      >
+        <Menu.Item
+          icon={menuIcon('home')}
+          title="Home"
+          onPress={() => onMenuItemSelect('Home')}
+        />
+        <Menu.Item
+          icon={menuIcon('briefcase')}
+          title="Experience"
+          onPress={() => onMenuItemSelect('Experience')}
+        />
+        <Menu.Item
+          icon={menuIcon('comments')}
+          title="Contact"
+          onPress={() => onMenuItemSelect('Contact')}
+        />
+      </Menu>
+      <Appbar.Content title="Daniel Burkhardt" titleStyle={styles.content} />
+      <Appbar.Action icon="linkedin-square" size={48} onPress={() => openBrowser()} />
+    </Appbar>
   );
 }
 
+const styles = StyleSheet.create({
+  top: {
+    minHeight: 96,
+  },
+  content: {
+    fontSize: 48
+  }
+});
 
 export default NavBar

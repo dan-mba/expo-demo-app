@@ -1,6 +1,6 @@
 import React from 'react';
-import { Layout, Button, Text, Divider } from '@ui-kitten/components';
-import { StyleSheet, SafeAreaView } from 'react-native';
+import { Button, Text, Divider } from 'react-native-paper';
+import { StyleSheet, SafeAreaView, View } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import NavBar from '../components/navbar.component'
 
@@ -15,10 +15,10 @@ const HomeScreen = () => {
     <SafeAreaView style={{flex: 1}}>
       <NavBar />
       <Divider />
-      <Layout style={styles.container}>
+      <View style={styles.container}>
         <Text style={styles.text} category='s1'>Test app built using Expo.</Text>
         <Button onPress={openBrowser}>Visit Expo Site</Button>
-      </Layout>
+      </View>
     </SafeAreaView>
   );
 }
