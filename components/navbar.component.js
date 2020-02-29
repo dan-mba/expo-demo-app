@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
+import {responsiveFontSize} from '../util/font'
 
 const NavBar = () => {
   const [menuVisible, setMenuVisible] = React.useState(false);
@@ -25,13 +26,38 @@ const NavBar = () => {
 
   const menuIcon = (name) => (props) => <FontAwesome name={name} {...props} />;
 
+  const fontSize = responsiveFontSize(32, 1.0);
+
+  const styles = StyleSheet.create({
+    top: {
+      minHeight: 96,
+      width: '100%'
+    },
+    content: {
+      paddingHorizontal: 2,
+      marginHorizontal: 0,
+    },
+    contentTitle: {
+      fontSize: fontSize,
+    },
+    icon: {
+      marginHorizontal: 2,
+      paddingHorizontal: 2,
+    }
+  });
+
   return (
     <Appbar style={styles.top}>
       <Menu
         visible={menuVisible}
         onDismiss={toggleMenu}
         anchor={
-          <Appbar.Action icon="bars" size={36} color="white" onPress={() => toggleMenu()} />
+          <Appbar.Action
+            icon="bars"
+            size={36}
+            style={styles.icon}
+            color="white"
+            onPress={() => toggleMenu()} />
         }
       >
         <Menu.Item
@@ -50,19 +76,19 @@ const NavBar = () => {
           onPress={() => onMenuItemSelect('Contact')}
         />
       </Menu>
-      <Appbar.Content title="Daniel Burkhardt" titleStyle={styles.content} />
-      <Appbar.Action icon="linkedin-square" size={48} onPress={() => openBrowser()} />
+      <Appbar.Content
+       title="Daniel Burkhardt"
+       titleStyle={styles.contentTitle}
+       style={styles.content}
+      />
+      <Appbar.Action
+        icon="linkedin-square"
+        size={48}
+        style={styles.icon}
+        onPress={() => openBrowser()}
+      />
     </Appbar>
   );
 }
-
-const styles = StyleSheet.create({
-  top: {
-    minHeight: 96,
-  },
-  content: {
-    fontSize: 48
-  }
-});
 
 export default NavBar

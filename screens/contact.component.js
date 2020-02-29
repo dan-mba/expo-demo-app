@@ -1,8 +1,9 @@
 import React from 'react';
 import { Card, Text, Divider, Chip, Button } from 'react-native-paper';
-import { StyleSheet, SafeAreaView, View } from 'react-native';
+import { StyleSheet, SafeAreaView, View, ScrollView } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
-import NavBar from '../components/navbar.component'
+import {responsiveFontSize} from '../util/font';
+import NavBar from '../components/navbar.component';
 
 const ContactScreen = () => {
 
@@ -10,11 +11,73 @@ const ContactScreen = () => {
     WebBrowser.openBrowserAsync('https://www.linkedin.com/in/danburkhardt')
   }
 
+  const mainFont = responsiveFontSize(20);
+  const chipFont = responsiveFontSize(18);
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      flexDirection: 'column',
+      backgroundColor: '#e0e0e0',
+    },
+    containerContent: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 15,
+
+    },
+    card: {
+      width: '90%',
+      height: null,
+      paddingVertical: 20,
+      paddingHorizontal: 10
+     },
+    content: {
+      fontSize: mainFont,
+      marginVertical: 15,
+    },
+    center: {
+      alignSelf: 'center',
+    },
+    image: {
+      height: 300,
+      width: 300,
+      alignSelf: 'center',
+      marginBottom: 15,
+    },
+    chipBox: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      flex: 0,
+      justifyContent: 'center'
+    },
+    chip: {
+      backgroundColor: '#006db0',
+      marginHorizontal: 5,
+      marginVertical: 2,
+    },
+    chipText: {
+      color: 'white',
+      fontSize: chipFont,
+    },
+    actions: {
+      marginTop: 10,
+      justifyContent: 'center',
+    },
+    actionLabel: {
+      fontSize: mainFont,
+    }
+  });
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <NavBar />
       <Divider />
-      <View style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.containerContent}
+        centerContent={true}
+      >
         <Card style={styles.card}>
           <Card.Cover source={require('../assets/map.png')} style={styles.image}/>
           <Card.Content>
@@ -34,57 +97,17 @@ const ContactScreen = () => {
             </View>
           </Card.Content>
           <Card.Actions style={styles.actions}>
-            <Button onPress={openBrowser}>Contact Me on LinkedIn</Button>
+            <Button
+              labelStyle={styles.actionLabel} 
+              onPress={openBrowser}
+            >Contact Me on LinkedIn</Button>
           </Card.Actions>
         </Card>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#e0e0e0',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  card: {
-    width: '90%',
-    height: null,
-    paddingVertical: 40,
-    paddingHorizontal: 10
-   },
-  content: {
-    fontSize: 18,
-    marginVertical: 15,
-  },
-  center: {
-    alignSelf: 'center',
-  },
-  image: {
-    height: 300,
-    width: 300,
-    alignSelf: 'center',
-    marginBottom: 15,
-  },
-  chipBox: {
-    flexDirection: 'row',
-    flex: 0,
-    justifyContent: 'center'
-  },
-  chip: {
-    backgroundColor: '#006db0',
-     marginHorizontal: 5,
-  },
-  chipText: {
-    color: 'white',
-  },
-  actions: {
-    marginTop: 10,
-    justifyContent: 'center',
-  }
-});
+
 
 export default ContactScreen;
