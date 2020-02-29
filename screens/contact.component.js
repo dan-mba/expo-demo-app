@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Text, Divider, Chip, Button } from 'react-native-paper';
-import { StyleSheet, SafeAreaView, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import * as WebBrowser from 'expo-web-browser';
 import {responsiveFontSize} from '../util/font';
 import NavBar from '../components/navbar.component';
@@ -15,6 +16,10 @@ const ContactScreen = () => {
   const chipFont = responsiveFontSize(18);
 
   const styles = StyleSheet.create({
+    safeArea: {
+      flex: 1,
+      backgroundColor: '#006db0'
+    },
     container: {
       flex: 1,
       flexDirection: 'column',
@@ -70,7 +75,7 @@ const ContactScreen = () => {
   });
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.safeArea}>
       <NavBar />
       <Divider />
       <ScrollView

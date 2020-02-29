@@ -1,6 +1,7 @@
 /* eslint react/display-name: [0] */
 import React from 'react';
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper'
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { FontAwesome } from '@expo/vector-icons';
 import AppNavigator from './components/navigation.component';
 
@@ -18,13 +19,15 @@ const theme = {
 
 export default function App() {
   return (
-    <PaperProvider
-      settings={{
-        icon: props => <FontAwesome {...props} />, 
-      }}
-      theme={theme}
-    >
-      <AppNavigator />
-    </PaperProvider>
+    <SafeAreaProvider>
+      <PaperProvider
+        settings={{
+          icon: props => <FontAwesome {...props} />, 
+        }}
+        theme={theme}
+      >
+        <AppNavigator />
+      </PaperProvider>
+    </SafeAreaProvider>
   );
 }

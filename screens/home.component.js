@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Text, Divider } from 'react-native-paper';
-import { StyleSheet, SafeAreaView, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context'
 import * as WebBrowser from 'expo-web-browser';
 import NavBar from '../components/navbar.component'
 
@@ -12,7 +13,7 @@ const HomeScreen = () => {
   }
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.safeArea}>
       <NavBar />
       <Divider />
       <View style={styles.container}>
@@ -24,6 +25,10 @@ const HomeScreen = () => {
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#006db0'
+  },
   container: {
     flex: 1,
     backgroundColor: '#e0e0e0',

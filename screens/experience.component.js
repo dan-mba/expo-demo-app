@@ -85,6 +85,10 @@ const ExperienceScreen = () => {
   const padding = Math.max(2,responsiveFontSize(2, 3.0));
 
   const styles = StyleSheet.create({
+    safeArea: {
+      flex: 1,
+      backgroundColor: '#006db0'
+    },
     container: {
       flex: 1,
       backgroundColor: '#e0e0e0',
@@ -138,7 +142,7 @@ const ExperienceScreen = () => {
   });
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.safeArea}>
       <NavBar />
       <Divider />
       <ScrollView style={styles.container} contentContainerStyle={styles.containerContent}>

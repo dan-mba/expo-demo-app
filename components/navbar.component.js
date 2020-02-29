@@ -30,7 +30,7 @@ const NavBar = () => {
 
   const styles = StyleSheet.create({
     top: {
-      minHeight: 96,
+      height: null,
       width: '100%'
     },
     content: {
@@ -47,7 +47,7 @@ const NavBar = () => {
   });
 
   return (
-    <Appbar style={styles.top}>
+    <Appbar.Header style={styles.top}>
       <Menu
         visible={menuVisible}
         onDismiss={toggleMenu}
@@ -87,7 +87,7 @@ const NavBar = () => {
         style={styles.icon}
         onPress={() => openBrowser()}
       />
-    </Appbar>
+    </Appbar.Header>
   );
 }
 
