@@ -2,14 +2,16 @@ import React from 'react';
 import { Card, Text, Divider, Chip, Button } from 'react-native-paper';
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import * as WebBrowser from 'expo-web-browser';
+import { Linking } from 'expo';
 import {responsiveFontSize} from '../util/font';
+import { EMAIL } from '../secrets/email';
 import NavBar from '../components/navbar.component';
 
 const ContactScreen = () => {
 
-  const openBrowser = () => {
-    WebBrowser.openBrowserAsync('https://www.linkedin.com/in/danburkhardt')
+  const sendEmail = () => {
+    console.log(EMAIL);
+    Linking.openURL(`mailto:${EMAIL}`);
   }
 
   const mainFont = responsiveFontSize(20);
@@ -104,8 +106,8 @@ const ContactScreen = () => {
           <Card.Actions style={styles.actions}>
             <Button
               labelStyle={styles.actionLabel} 
-              onPress={openBrowser}
-            >Contact Me on LinkedIn</Button>
+              onPress={sendEmail}
+            >E-mail Me</Button>
           </Card.Actions>
         </Card>
       </ScrollView>

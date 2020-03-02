@@ -71,6 +71,11 @@ const NavBar = () => {
           onPress={() => onMenuItemSelect('Experience')}
         />
         <Menu.Item
+          icon={menuIcon('graduation-cap')}
+          title="Education"
+          onPress={() => onMenuItemSelect('Education')}
+        />
+        <Menu.Item
           icon={menuIcon('comments')}
           title="Contact"
           onPress={() => onMenuItemSelect('Contact')}
