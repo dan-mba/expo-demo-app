@@ -10,7 +10,6 @@ import NavBar from '../components/navbar.component';
 const ContactScreen = () => {
 
   const sendEmail = () => {
-    console.log(EMAIL);
     Linking.openURL(`mailto:${EMAIL}`);
   }
 
