@@ -54,7 +54,7 @@ const HomeScreen = ({theme: {colors}}) => {
     },
     buttonLabel: {
       fontSize: linkFont,
-      marginHorizontal: 0
+      marginHorizontal: 5
     }
   });
 
